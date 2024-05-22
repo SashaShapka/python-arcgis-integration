@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from datetime import datetime
+from arc_gis_python_job.config import logging
 import os
 
 from arcgis_python_db.db import ArcGisPythonDB
@@ -50,7 +50,7 @@ class NameCheck(AbstractCheck):
             self.project_name_check(project_name=project_name)
         except:
             raise Exception("Name is incorrect ")
-        print('successfully validation - project_name')
+        logging.info('Successfully validation - project_name')
         super().check(project_name=project_name, project_path=project_path, project_id=project_id, object_type=object_type, input_file_path=input_file_path)
 
 
@@ -60,7 +60,7 @@ class PathCheck(AbstractCheck):
             self.is_path(project_path if project_path else input_file_path)
         except:
             raise Exception("Path is incorrect")
-        print('successfully validation - path_check')
+        logging.info('successfully validation - path_check')
 
 
 class ProjectCheck(AbstractCheck):
@@ -71,7 +71,7 @@ class ProjectCheck(AbstractCheck):
             except:
                 raise Exception("Project does not exist")
 
-        print("successfully validation - project_id")
+        logging.info("successfully validation - project_id")
         super().check(project_name=project_name, project_path=project_path, project_id=project_id, object_type=object_type, input_file_path=input_file_path)
 
 
@@ -79,7 +79,7 @@ class TypeCheck(AbstractCheck):
 
     def check(self, db=db, project_name=None, project_path=None, project_id=None, object_type=None, input_file_path=None):
         if Types.has_value(object_type):
-            print("successfully validation - object_type")
+            logging.info("successfully validation - object_type")
         else:
             raise Exception("Type is invalid")
 

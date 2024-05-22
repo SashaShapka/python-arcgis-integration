@@ -12,7 +12,6 @@ from arcgis_python_db.db import ArcGisPythonDB
 
 
 db = ArcGisPythonDB()
-INTERPRETER = r'D:\arcgis_pro\bin\Python\envs\arcgispro-py3\python.exe'
 
 
 class Context:
@@ -102,9 +101,4 @@ class XLSXStrategy(Strategy):
         for row in sheet.iter_rows(min_row=2, values_only=True):
             points.append((self.clean_and_convert(row[1]), self.clean_and_convert(row[2])))
 
-        """ ...  конвертація та запис в базу """
-
-
-
-
-
+        #TODO: countinue

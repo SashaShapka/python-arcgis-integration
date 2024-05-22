@@ -1,4 +1,6 @@
-import os
+import logging
+logging = logging.basicConfig(filename='app.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 DB_NAME = "arcgis_python_int"
 # TEST_DB_NAME = "passport_office_test"

@@ -1,9 +1,7 @@
 #!D:\arcgis_pro\bin\Python\envs\arcgispro-py3\python.exe
-import argparse
-
-from arc_gis_python_job.models import Types
 from arcgis_python_db.db import ArcGisPythonDB
 from arc_gis_python_job.models import Project, Object, Coordinates
+from arc_gis_python_job.config import logging
 
 db = ArcGisPythonDB()
 
@@ -19,6 +17,9 @@ def get_prework_arguments(project_id, object_id):
 
 
 def create_poligon(project_id, object_id):
+
+    logging.info("Starting creating POLIGON object")
+
     import arcpy
     magick_name = False
 
@@ -41,14 +42,15 @@ def create_poligon(project_id, object_id):
         polygon_fc = arcpy.management.CreateFeatureclass(
             project_path, name, "POLYGON", spatial_reference=spatial_reference)
         cursor = arcpy.da.InsertCursor(polygon_fc, ["SHAPE@"])
-
         polygon = arcpy.Polygon(arcpy_array)
-
         cursor.insertRow([polygon])
         index += 1
 
 
 def create_polyline(project_id, object_id):
+
+    logging.info("Starting creating POLILINE object")
+
     import arcpy
 
     project_path, object_name, coordinate_system, points = get_prework_arguments(project_id=project_id,
@@ -78,6 +80,9 @@ def create_polyline(project_id, object_id):
 
 
 def create_point_layer(project_id, object_id):
+
+    logging.info("Starting creating POINT object")
+
     import arcpy
 
     project_path, object_name, coordinate_system, points = get_prework_arguments(project_id=project_id,
